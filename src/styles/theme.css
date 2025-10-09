@@ -1,0 +1,14 @@
+@theme {
+  --color-primary: #333;
+  --color-secondary: #999;
+  --color-bg: #eee;
+  --color-border: #ccc;
+
+  --color-skeleton: rgba(0 0 0 / 10%);
+
+  --color-brand: #333;
+
+  /* --font-sans: 'Poppins', sans-serif; */
+
+  /* --transition: all 0.2s ease-in-out; */
+}
