@@ -2,9 +2,26 @@
 
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+import { useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
+import * as THREE from 'three'
 
 function RetroGrid() {
-	return <gridHelper args={[100, 100, '#666', '#666']} position={[0, 0, 0]} />
+	const gridRef = useRef<THREE.GridHelper>(null)
+	const moveDistance = 50
+	const resetPosition = 0
+
+	useFrame(state => {
+		if (gridRef.current) {
+			gridRef.current.position.z += 0.05
+
+			if (gridRef.current.position.z > moveDistance) {
+				gridRef.current.position.z = resetPosition
+			}
+		}
+	})
+
+	return <gridHelper ref={gridRef} args={[200, 200, '#666', '#666']} position={[0, 0, resetPosition]} scale={[2, 1, 1]} />
 }
 
 export default function Page() {
@@ -13,7 +30,7 @@ export default function Page() {
 			<div className='mx-auto h-[500px] w-[800px] rounded-lg border bg-white'>
 				<Canvas
 					camera={{
-						position: [0, 15, 15], // 相机位置 (x, y, z)，默认 [0, 0, 5]
+						position: [0, 15, 10], // 相机位置 (x, y, z)，默认 [0, 0, 5]
 						fov: 60, // 视野角度，数值越大视野越宽，默认 75
 						near: 0.1, // 近裁剪面，距离相机多近开始渲染，默认 0.1
 						far: 1000 // 远裁剪面，距离相机多远停止渲染，默认 1000
