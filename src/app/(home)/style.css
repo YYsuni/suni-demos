@@ -14,5 +14,5 @@
 }
 
 @utility bg-pan-down {
-	animation: grid-pan-y 8s linear infinite;
+	animation: grid-pan-y 3s linear infinite;
 }
