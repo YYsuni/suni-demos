@@ -4,7 +4,6 @@ import { Canvas } from '@react-three/fiber'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useRef } from 'react'
-import { OrbitControls } from '@react-three/drei'
 
 function RotatingCircles() {
 	const groupRef = useRef<THREE.Group>(null)
@@ -69,7 +68,7 @@ function RotatingCircles() {
 
 export default function RotatingTorusComponent() {
 	return (
-		<div className='mx-auto h-[500px] w-[800px] rounded-lg border bg-white'>
+		<div className='mx-auto h-[500px] w-[800px] rounded-lg border bg-white max-sm:h-[400px] max-sm:w-full'>
 			<Canvas
 				camera={{
 					position: [0.404, 2.788, 10.879],

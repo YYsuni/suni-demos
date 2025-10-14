@@ -25,7 +25,7 @@ function RetroGrid() {
 
 export default function ThreeGrid() {
 	return (
-		<div className='mx-auto h-[500px] w-[800px] rounded-lg border bg-white'>
+		<div className='mx-auto h-[500px] w-[800px] overflow-hidden rounded-lg border bg-white max-sm:h-[400px] max-sm:w-full'>
 			<Canvas
 				camera={{
 					position: [0, 6, 9], // 相机位置 (x, y, z)，默认 [0, 0, 5]
@@ -34,6 +34,7 @@ export default function ThreeGrid() {
 					far: 30 // 远裁剪面，距离相机多远停止渲染，默认 1000
 				}}>
 				<fog attach='fog' args={['#fafafa', 10, 30]} />
+				<color attach='background' args={['#fff']} />
 				<RetroGrid />
 				{/* <OrbitControls enableDamping dampingFactor={0.05} /> */}
 			</Canvas>

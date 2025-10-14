@@ -86,7 +86,7 @@ function CylinderStructure() {
 
 export default function TubeCamera() {
 	return (
-		<div className='mx-auto h-[500px] w-[800px] rounded-lg border bg-white'>
+		<div className='mx-auto h-[500px] w-[800px] rounded-lg border bg-white max-sm:h-[400px] max-sm:w-full'>
 			<Canvas>
 				<fog attach='fog' args={['#fff', 5, 12]} />
 
