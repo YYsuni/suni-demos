@@ -1,7 +1,6 @@
 'use client'
 
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Edges, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useEffect, useRef } from 'react'
@@ -22,30 +21,6 @@ function RetroGrid() {
 	})
 
 	return <gridHelper ref={gridRef} args={[200, 200, '#666', '#666']} position={[0, 0, resetPosition]} scale={[2, 1, 1.5]} />
-}
-
-function Oct() {
-	const { nodes } = useGLTF('/oct.glb')
-	const ref = useRef<THREE.Mesh>(null)
-	const moveDistance = 15
-	const resetPosition = -15
-
-	useFrame(state => {
-		if (ref.current) {
-			ref.current.position.z += 0.02
-
-			if (ref.current.position.z > moveDistance) {
-				ref.current.position.z = resetPosition
-			}
-		}
-	})
-
-	return (
-		<mesh ref={ref} geometry={(nodes.oct as THREE.Mesh).geometry} position={[2, 1, resetPosition]} scale={[0.5, 0.5, 0.5]} rotateY={45}>
-			<meshBasicMaterial transparent />
-			<Edges color={'#999'} />
-		</mesh>
-	)
 }
 
 export default function ThreeGrid() {
