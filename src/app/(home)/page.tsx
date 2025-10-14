@@ -1,6 +1,7 @@
 import CSSGrid from '@/components/css-grid'
 import ThreeGrid from '@/components/three-grid'
 import RotatingTorusComponent from '@/components/rotating-torus'
+import TubeCamera from '@/components/tube-camera'
 
 export default function Home() {
 	return (
@@ -8,6 +9,7 @@ export default function Home() {
 			<CSSGrid />
 			<ThreeGrid />
 			<RotatingTorusComponent />
+			<TubeCamera />
 		</div>
 	)
 }
