@@ -11,10 +11,7 @@ function TexturedShape({
 	geometry,
 	position,
 	label,
-	repeatX,
-	repeatY,
-	wrapS,
-	wrapT
+	...textureProps
 }: {
 	geometry: ReactNode
 	position: [number, number, number]
@@ -23,15 +20,24 @@ function TexturedShape({
 	repeatY: number
 	wrapS: Wrapping
 	wrapT: Wrapping
+	offsetX: number
+	offsetY: number
+	rotation: number
+	centerX: number
+	centerY: number
 }) {
 	const texture = useTexture(woodTexture.src)
 
 	useEffect(() => {
+		const { repeatX, repeatY, wrapS, wrapT, offsetX, offsetY, rotation, centerX, centerY } = textureProps
 		texture.repeat.set(repeatX, repeatY)
 		texture.wrapS = wrapS
 		texture.wrapT = wrapT
+		texture.offset.set(offsetX, offsetY)
+		texture.rotation = rotation
+		texture.center.set(centerX, centerY)
 		texture.needsUpdate = true
-	}, [texture, repeatX, repeatY, wrapS, wrapT])
+	}, [texture, textureProps.repeatX, textureProps.repeatY, textureProps.wrapS, textureProps.wrapT, textureProps.offsetX, textureProps.offsetY, textureProps.rotation, textureProps.centerX, textureProps.centerY])
 
 	return (
 		<group position={position}>
@@ -55,7 +61,7 @@ export default function Page() {
 		ambientIntensity: { value: 5, min: 0, max: 10, step: 0.1 }
 	})
 
-	const { repeatX, repeatY, wrapS, wrapT } = useControls('Texture', {
+	const textureProps = useControls('Texture', {
 		repeatX: { value: 2, min: 0.1, max: 10, step: 0.1 },
 		repeatY: { value: 3, min: 0.1, max: 10, step: 0.1 },
 		wrapS: {
@@ -73,7 +79,12 @@ export default function Page() {
 				ClampToEdgeWrapping: ClampToEdgeWrapping,
 				MirroredRepeatWrapping: MirroredRepeatWrapping
 			}
-		}
+		},
+		offsetX: { value: 0, min: -1, max: 1, step: 0.01 },
+		offsetY: { value: 0, min: -1, max: 1, step: 0.01 },
+		rotation: { value: 0, min: 0, max: Math.PI * 2, step: 0.01 },
+		centerX: { value: 0.5, min: 0, max: 1, step: 0.01 },
+		centerY: { value: 0.5, min: 0, max: 1, step: 0.01 }
 	})
 
 	return (
@@ -93,10 +104,7 @@ export default function Page() {
 					geometry={<boxGeometry args={[1, 1, 1]} />}
 					position={[-3, 0, 0]}
 					label='Box'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{/* Sphere */}
@@ -104,10 +112,7 @@ export default function Page() {
 					geometry={<sphereGeometry args={[0.7, 32, 32]} />}
 					position={[-1, 0, 0]}
 					label='Sphere'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{/* Cylinder */}
@@ -115,10 +120,7 @@ export default function Page() {
 					geometry={<cylinderGeometry args={[0.6, 0.6, 1.2, 32]} />}
 					position={[1, 0, 0]}
 					label='Cylinder'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{/* Cone */}
@@ -126,10 +128,7 @@ export default function Page() {
 					geometry={<coneGeometry args={[0.7, 1.2, 32]} />}
 					position={[3, 0, 0]}
 					label='Cone'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{/* Torus */}
@@ -137,10 +136,7 @@ export default function Page() {
 					geometry={<torusGeometry args={[0.6, 0.3, 16, 32]} />}
 					position={[-3, 2, 0]}
 					label='Torus'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{/* Plane */}
@@ -148,10 +144,7 @@ export default function Page() {
 					geometry={<planeGeometry args={[1.2, 1.2]} />}
 					position={[-1, 2, 0]}
 					label='Plane'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{/* Octahedron */}
@@ -159,10 +152,7 @@ export default function Page() {
 					geometry={<octahedronGeometry args={[0.8]} />}
 					position={[1, 2, 0]}
 					label='Octahedron'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{/* Tetrahedron */}
@@ -170,10 +160,7 @@ export default function Page() {
 					geometry={<tetrahedronGeometry args={[0.8]} />}
 					position={[3, 2, 0]}
 					label='Tetrahedron'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{/* Icosahedron */}
@@ -181,10 +168,7 @@ export default function Page() {
 					geometry={<icosahedronGeometry args={[0.7]} />}
 					position={[-3, -2, 0]}
 					label='Icosahedron'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{/* Dodecahedron */}
@@ -192,10 +176,7 @@ export default function Page() {
 					geometry={<dodecahedronGeometry args={[0.7]} />}
 					position={[-1, -2, 0]}
 					label='Dodecahedron'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{/* TorusKnot */}
@@ -203,10 +184,7 @@ export default function Page() {
 					geometry={<torusKnotGeometry args={[0.5, 0.2, 64, 16]} />}
 					position={[1, -2, 0]}
 					label='TorusKnot'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{/* Ring */}
@@ -214,10 +192,7 @@ export default function Page() {
 					geometry={<ringGeometry args={[0.4, 0.7, 32]} />}
 					position={[3, -2, 0]}
 					label='Ring'
-					repeatX={repeatX}
-					repeatY={repeatY}
-					wrapS={wrapS}
-					wrapT={wrapT}
+					{...textureProps}
 				/>
 
 				{showGrid && <gridHelper args={[gridSize, gridSize]} />}
