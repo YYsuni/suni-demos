@@ -15,12 +15,17 @@ const nextConfig: NextConfig = {
 			}
 		},
 
-		resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json', 'css']
+		resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json', 'css', '.glb', '.gltf']
 	},
 	webpack: config => {
 		config.module.rules.push({
 			test: /\.svg$/i,
 			use: [{ loader: '@svgr/webpack', options: { svgo: false } }]
+		})
+
+		config.module.rules.push({
+			test: /\.(glb|gltf)$/i,
+			type: 'asset/resource'
 		})
 
 		return config
