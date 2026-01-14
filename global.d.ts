@@ -18,6 +18,21 @@ declare module '*.gltf' {
 	export default content
 }
 
+declare module '*.vert' {
+	const content: string
+	export default content
+}
+
+declare module '*.frag' {
+	const content: string
+	export default content
+}
+
+declare module '*.glsl' {
+	const content: string
+	export default content
+}
+
 declare type NullableNumber = string | number | null
 declare type NullableObject = Record<string, any> | null
 declare type NullableArray = Record<string, any>[] | null

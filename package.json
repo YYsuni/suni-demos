@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack -p 4031",
+    "dev": "next dev --turbopack -p 4032",
     "build": "next build --turbopack",
     "start": "next start"
   },
@@ -19,11 +19,13 @@
     "leva": "^0.10.1",
     "motion": "^12.23.22",
     "next": "15.5.9",
+    "raw-loader": "^4.0.2",
     "react": "19.1.2",
     "react-dom": "19.1.2",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.180.0",
+    "three-custom-shader-material": "^6.4.0",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

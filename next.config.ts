@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  devIndicators: false,
+	devIndicators: false,
 	reactStrictMode: false,
 	pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 	experimental: {
@@ -11,6 +11,18 @@ const nextConfig: NextConfig = {
 		rules: {
 			'*.svg': {
 				loaders: ['@svgr/webpack'],
+				as: '*.js'
+			},
+			'*.vert': {
+				loaders: ['raw-loader'],
+				as: '*.js'
+			},
+			'*.frag': {
+				loaders: ['raw-loader'],
+				as: '*.js'
+			},
+			'*.glsl': {
+				loaders: ['raw-loader'],
 				as: '*.js'
 			}
 		},
@@ -28,8 +40,13 @@ const nextConfig: NextConfig = {
 			type: 'asset/resource'
 		})
 
+		config.module.rules.push({
+			test: /\.(vert|frag|glsl)$/i,
+			use: 'raw-loader'
+		})
+
 		return config
 	}
-};
+}
 
-export default nextConfig;
+export default nextConfig
